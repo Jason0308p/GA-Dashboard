@@ -49,12 +49,12 @@
       <a href="#events">事件</a>
       <a href="#funnels">漏斗</a>
       <a href="#gsc">GSC</a>
-      <a href="dashboard_test.html" class="switch">前往測試表</a>
+      <a href="dashboard.html" class="switch">回正式表</a>
     </div>
     <h1>SYFGIFT 90 天 GA4 / GSC Dashboard</h1>
     <div class="sub">GA4 snapshot 2026-05-15 | rebuilt 2026-06-01 10:53:27</div>
     <div class="note">正式表維持核心圖表穩定，新的 GA 診斷區塊先放在測試表驗證。</div>
-    
+    <div class='note'>這是測試表。新的診斷區塊先在這裡驗證，確認沒問題後再移到正式表。</div>
 
     <section id="summary">
       <h2>摘要</h2>
@@ -75,6 +75,154 @@
       <div id="chart_landing" class="chart"></div>
     </section>
 
+    
+    <section id="ai-referrer">
+      <h2>AI / Referrer 來源表</h2>
+      <p>資料來源：landingPage + pageReferrer。Session = 從該 AI 網站點進來的 sessions；Landing Pages = 被送進的不重複頁面數。</p>
+      
+      <div class="table-wrap"><table class="data-table">
+        <tr><th>來源</th><th>Sessions</th><th>Landing Pages</th><th>Referrer 樣本</th></tr>
+        <tr><td>ChatGPT</td><td>28</td><td>19</td><td>https://chatgpt.com/</td></tr><tr><td>Gemini</td><td>12</td><td>5</td><td>https://gemini.google.com/</td></tr>
+      </table></div>
+    </section>
+    <section id="landing-diagnostics">
+      <h2>Landing Page 深挖區</h2>
+      <p>這一區集中放後續值得深挖的 GA 判讀表，全部都用目前已抓回來的真實資料，不用推估值補空。</p>
+      <div class="subcard">
+        <h3>Landing Page Sessions 排名切換</h3>
+        <p>同樣用 landing page sessions 排名，比對原始排名，以及排除平均停留時間 3 秒內頁面後的排名變化。</p>
+        <div class="toggle-bar">
+          <button class="toggle-btn active" type="button" onclick="toggleLandingRank('raw', this)">原始排名</button>
+          <button class="toggle-btn" type="button" onclick="toggleLandingRank('filtered', this)">排除停留 3 秒內</button>
+        </div>
+        <div id="landing-rank-raw" class="toggle-pane active">
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>Landing Page</th><th>Sessions</th><th>平均停留秒數</th><th>跳出率</th></tr>
+            <tr><td>1</td><td>(not set)</td><td>6,275</td><td>11.1</td><td>91.5%</td></tr><tr><td>2</td><td>/</td><td>5,094</td><td>106.0</td><td>2.6%</td></tr><tr><td>3</td><td>/search</td><td>981</td><td>91.0</td><td>0.8%</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>724</td><td>110.3</td><td>1.0%</td></tr><tr><td>5</td><td>/collections/客製不織布袋</td><td>698</td><td>115.2</td><td>1.7%</td></tr><tr><td>6</td><td>/products/60ba-0071</td><td>678</td><td>30.7</td><td>0.9%</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>648</td><td>67.3</td><td>1.2%</td></tr><tr><td>8</td><td>/collections/vendors</td><td>637</td><td>36.6</td><td>7.7%</td></tr><tr><td>9</td><td>/collections/飲料提袋</td><td>615</td><td>83.6</td><td>1.1%</td></tr><tr><td>10</td><td>/collections/保冷袋</td><td>575</td><td>70.3</td><td>1.2%</td></tr>
+          </table></div>
+        </div>
+        <div id="landing-rank-filtered" class="toggle-pane">
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>Landing Page</th><th>Sessions</th><th>平均停留秒數</th><th>跳出率</th></tr>
+            <tr><td>1</td><td>(not set)</td><td>6,275</td><td>11.1</td><td>91.5%</td></tr><tr><td>2</td><td>/</td><td>5,094</td><td>106.0</td><td>2.6%</td></tr><tr><td>3</td><td>/search</td><td>981</td><td>91.0</td><td>0.8%</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>724</td><td>110.3</td><td>1.0%</td></tr><tr><td>5</td><td>/collections/客製不織布袋</td><td>698</td><td>115.2</td><td>1.7%</td></tr><tr><td>6</td><td>/products/60ba-0071</td><td>678</td><td>30.7</td><td>0.9%</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>648</td><td>67.3</td><td>1.2%</td></tr><tr><td>8</td><td>/collections/vendors</td><td>637</td><td>36.6</td><td>7.7%</td></tr><tr><td>9</td><td>/collections/飲料提袋</td><td>615</td><td>83.6</td><td>1.1%</td></tr><tr><td>10</td><td>/collections/保冷袋</td><td>575</td><td>70.3</td><td>1.2%</td></tr>
+          </table></div>
+        </div>
+        <div class="table-wrap" style="margin-top:12px;"><table class="data-table">
+          <tr><th>Landing Page</th><th>原始排名</th><th>排除後排名</th><th>名次變化</th><th>Sessions</th><th>平均停留秒數</th></tr>
+          <tr><td>(not set)</td><td>1</td><td>1</td><td>0</td><td>6,275</td><td>11.1</td></tr><tr><td>/</td><td>2</td><td>2</td><td>0</td><td>5,094</td><td>106.0</td></tr><tr><td>/search</td><td>3</td><td>3</td><td>0</td><td>981</td><td>91.0</td></tr><tr><td>/collections/收納袋</td><td>4</td><td>4</td><td>0</td><td>724</td><td>110.3</td></tr><tr><td>/collections/客製不織布袋</td><td>5</td><td>5</td><td>0</td><td>698</td><td>115.2</td></tr><tr><td>/products/60ba-0071</td><td>6</td><td>6</td><td>0</td><td>678</td><td>30.7</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>7</td><td>7</td><td>0</td><td>648</td><td>67.3</td></tr><tr><td>/collections/vendors</td><td>8</td><td>8</td><td>0</td><td>637</td><td>36.6</td></tr><tr><td>/collections/飲料提袋</td><td>9</td><td>9</td><td>0</td><td>615</td><td>83.6</td></tr><tr><td>/collections/保冷袋</td><td>10</td><td>10</td><td>0</td><td>575</td><td>70.3</td></tr>
+        </table></div>
+      </div>
+      <div class="subcard">
+        <h3>Landing Page 本月 vs 上月增幅（sessions）</h3>
+        <div class="table-wrap"><table class="data-table">
+          <tr><th>Landing Page</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+          <tr><td>/collections/vendors</td><td>145</td><td>294</td><td>+149 (+102.8%)</td></tr><tr><td>/collections/活動周邊</td><td>50</td><td>97</td><td>+47 (+94.0%)</td></tr><tr><td>/pages/backtoschool</td><td>24</td><td>70</td><td>+46 (+191.7%)</td></tr><tr><td>/collections/面紙包</td><td>77</td><td>118</td><td>+41 (+53.2%)</td></tr><tr><td>/pages/exhibition-gifts</td><td>92</td><td>133</td><td>+41 (+44.6%)</td></tr><tr><td>/products/60za-0617</td><td>1</td><td>39</td><td>+38 (+3800.0%)</td></tr><tr><td>/collections/客製隨身碟</td><td>45</td><td>80</td><td>+35 (+77.8%)</td></tr><tr><td>/products/56wa-0122</td><td>0</td><td>33</td><td>+33 (new)</td></tr><tr><td>/products/59ka-0013</td><td>0</td><td>33</td><td>+33 (new)</td></tr><tr><td>/collections/廣告扇</td><td>140</td><td>172</td><td>+32 (+22.9%)</td></tr>
+        </table></div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Landing Page → 後續互動分佈</h3>
+          <p>這張表已改用 `landingPage + eventName` 真資料，直接看哪些入口頁有搜尋與 LINE 行為。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Landing Page</th><th>Sessions</th><th>Search</th><th>LINE</th></tr>
+            <tr><td>/collections/客製不織布袋</td><td>746</td><td>78</td><td>113</td></tr><tr><td>/collections/收納袋</td><td>791</td><td>60</td><td>108</td></tr><tr><td>/collections/帆布袋</td><td>430</td><td>45</td><td>83</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>704</td><td>55</td><td>79</td></tr><tr><td>/collections/馬克杯</td><td>606</td><td>55</td><td>76</td></tr><tr><td>/collections/飲料提袋</td><td>672</td><td>48</td><td>69</td></tr><tr><td>/collections/l型資料夾</td><td>346</td><td>36</td><td>63</td></tr><tr><td>/collections/廣告扇</td><td>415</td><td>35</td><td>62</td></tr><tr><td>/collections/保冷袋</td><td>575</td><td>19</td><td>62</td></tr><tr><td>/collections/廣告筆</td><td>250</td><td>22</td><td>52</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>站內搜尋字</h3>
+          <p>這張表目前顯示 `searchTerm + eventName` 可見到的搜尋與表單事件，方便先看哪些搜尋字有量。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Search Term</th><th>Search</th><th>Results</th><th>Form Start</th><th>Form Submit</th><th>Submit Rate</th></tr>
+            <tr><td>鑰匙圈</td><td>233</td><td>233</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>磁鐵</td><td>176</td><td>178</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>隨身碟</td><td>158</td><td>161</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>杯</td><td>146</td><td>146</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>筆</td><td>129</td><td>130</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>便利貼</td><td>125</td><td>127</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>馬克杯</td><td>119</td><td>120</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>便條紙</td><td>118</td><td>119</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>筆記本</td><td>106</td><td>107</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>不織布</td><td>104</td><td>104</td><td>0</td><td>0</td><td>0.0%</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </section>
+    <section id="landing-b4">
+      <h2>Landing Page 對應 B4 核心分類</h2>
+      <p>這張表把目前 landing page 對到 B4 分類資料；對得到就顯示核心分類，對不到就保留 unmatched，不亂猜。</p>
+      <div class="table-wrap"><table class="data-table">
+        <tr><th>Landing Page</th><th>Sessions</th><th>對應狀態</th><th>B4 核心分類</th><th>類別編號</th><th>所屬新大類</th></tr>
+        <tr><td>(not set)</td><td>6,275</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/</td><td>5,094</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/search</td><td>981</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/collections/收納袋</td><td>724</td><td>exact_name</td><td>56GA 收納袋</td><td>56GA 收納袋</td><td>A-提袋背包</td></tr><tr><td>/collections/客製不織布袋</td><td>698</td><td>fuzzy_core_name</td><td>56AA 不織布袋</td><td>56AC 覆膜防水袋</td><td>A-提袋背包</td></tr><tr><td>/products/60ba-0071</td><td>678</td><td>product_code</td><td>60BA 磁鐵冰箱貼</td><td>60BA 磁鐵冰箱貼</td><td>E-活動廣告</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>648</td><td>exact_name</td><td>60BA 磁鐵冰箱貼</td><td>60BA 磁鐵冰箱貼</td><td>E-活動廣告</td></tr><tr><td>/collections/vendors</td><td>637</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/collections/飲料提袋</td><td>615</td><td>exact_name</td><td>59KA 飲料提袋</td><td>59KA 飲料提袋</td><td>B-杯子杯墊</td></tr><tr><td>/collections/保冷袋</td><td>575</td><td>exact_name</td><td>56FA 保冷袋</td><td>56FA 保冷袋</td><td>A-提袋背包</td></tr>
+      </table></div>
+    </section>
+    <section id="page-session-ranking">
+      <h2>頁面 Session 排名與月增幅</h2>
+      <p>這一組表的 metric 都是 `sessions`；`Sessions` 來自 GA4，`GSC Clicks` 則是同頁面在同報表期間的 GSC 點擊，並列對照，不是混成同一個數字。</p>
+      <div class="two-col">
+        <div class="subcard">
+          <h3>目前頁面 Session 排名</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>頁面</th><th>Sessions</th><th>GSC Clicks</th><th>B4 核心分類</th></tr>
+            <tr><td>1</td><td>/pages/request-for-quote</td><td>2,332</td><td>0</td><td></td></tr><tr><td>2</td><td>/collections/vendors</td><td>1,401</td><td>9</td><td></td></tr><tr><td>3</td><td>/collections/客製不織布袋</td><td>1,158</td><td>555</td><td>56AA 不織布袋</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>1,110</td><td>660</td><td>56GA 收納袋</td></tr><tr><td>5</td><td>/pages/about-us</td><td>885</td><td>71</td><td></td></tr><tr><td>6</td><td>/collections/飲料提袋</td><td>877</td><td>575</td><td>59KA 飲料提袋</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>870</td><td>589</td><td>60BA 磁鐵冰箱貼</td></tr><tr><td>8</td><td>/collections/帆布袋</td><td>856</td><td>273</td><td>56CA 帆布袋</td></tr><tr><td>9</td><td>/collections/企業客戶合作案例</td><td>825</td><td>0</td><td></td></tr><tr><td>10</td><td>/collections/馬克杯</td><td>782</td><td>462</td><td>59AA 馬克杯</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>本月 vs 上月成長最多頁面 Top 10（sessions）</h3>
+          <p>202604 vs 202605</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/vendors</td><td>379</td><td>543</td><td>+164 (+43.3%)</td></tr><tr><td>/pages/backtoschool</td><td>57</td><td>117</td><td>+60 (+105.3%)</td></tr><tr><td>/collections/活動周邊</td><td>67</td><td>124</td><td>+57 (+85.1%)</td></tr><tr><td>/collections/廣告扇</td><td>161</td><td>216</td><td>+55 (+34.2%)</td></tr><tr><td>/collections/l型資料夾</td><td>144</td><td>193</td><td>+49 (+34.0%)</td></tr><tr><td>/collections/馬克杯</td><td>235</td><td>282</td><td>+47 (+20.0%)</td></tr><tr><td>/collections/面紙包</td><td>97</td><td>143</td><td>+46 (+47.4%)</td></tr><tr><td>/collections/客製隨身碟</td><td>52</td><td>94</td><td>+42 (+80.8%)</td></tr><tr><td>/collections/趣味玩樂</td><td>33</td><td>75</td><td>+42 (+127.3%)</td></tr><tr><td>/products/60za-0617</td><td>1</td><td>43</td><td>+42 (+4200.0%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>本月 vs 上月下滑最多頁面 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/products/59ea-0003</td><td>124</td><td>5</td><td>-119 (-96.0%)</td></tr><tr><td>/products/53aa-1241</td><td>87</td><td>5</td><td>-82 (-94.3%)</td></tr><tr><td>/collections/收納袋</td><td>413</td><td>339</td><td>-74 (-17.9%)</td></tr><tr><td>/collections/客製不織布袋</td><td>390</td><td>319</td><td>-71 (-18.2%)</td></tr><tr><td>/collections/胸章徽章</td><td>173</td><td>108</td><td>-65 (-37.6%)</td></tr><tr><td>/collections/燙布貼</td><td>218</td><td>161</td><td>-57 (-26.1%)</td></tr><tr><td>/collections/飲料提袋</td><td>336</td><td>279</td><td>-57 (-17.0%)</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>294</td><td>238</td><td>-56 (-19.0%)</td></tr><tr><td>/products/65da-0062</td><td>153</td><td>101</td><td>-52 (-34.0%)</td></tr><tr><td>/collections/金屬書籤/products/51za-0603</td><td>49</td><td>5</td><td>-44 (-89.8%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>自訂頁 /pages/* 成長 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/pages/backtoschool</td><td>57</td><td>117</td><td>+60 (+105.3%)</td></tr><tr><td>/pages/exhibition-gifts</td><td>205</td><td>242</td><td>+37 (+18.0%)</td></tr><tr><td>/pages/廣告扇</td><td>6</td><td>38</td><td>+32 (+533.3%)</td></tr><tr><td>/pages/request-for-quote</td><td>731</td><td>760</td><td>+29 (+4.0%)</td></tr><tr><td>/pages/healthcare_expo</td><td>33</td><td>60</td><td>+27 (+81.8%)</td></tr><tr><td>/pages/客製化usb風扇</td><td>0</td><td>24</td><td>+24 (new)</td></tr><tr><td>/pages/summer_sale</td><td>50</td><td>71</td><td>+21 (+42.0%)</td></tr><tr><td>/pages/客製化傳輸線</td><td>10</td><td>29</td><td>+19 (+190.0%)</td></tr><tr><td>/pages/2025國際茶-咖啡展-酒展</td><td>34</td><td>52</td><td>+18 (+52.9%)</td></tr><tr><td>/pages/客製化水瓶</td><td>26</td><td>40</td><td>+14 (+53.8%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>自訂頁 /pages/* 下滑 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/pages/downloads</td><td>86</td><td>77</td><td>-9 (-10.5%)</td></tr><tr><td>/pages/privacy-policy-statement</td><td>5</td><td>2</td><td>-3 (-60.0%)</td></tr><tr><td>/pages/客製環保餐具</td><td>64</td><td>61</td><td>-3 (-4.7%)</td></tr><tr><td>/pages/書籍估價系統</td><td>11</td><td>8</td><td>-3 (-27.3%)</td></tr><tr><td>/pages/reviews</td><td>240</td><td>242</td><td>+2 (+0.8%)</td></tr><tr><td>/pages/購物需知</td><td>18</td><td>20</td><td>+2 (+11.1%)</td></tr><tr><td>/pages/退換貨政策</td><td>4</td><td>7</td><td>+3 (+75.0%)</td></tr><tr><td>/pages/客製行動電源</td><td>41</td><td>46</td><td>+5 (+12.2%)</td></tr><tr><td>/pages/2025台北婦幼展活動周邊禮贈品</td><td>34</td><td>40</td><td>+6 (+17.6%)</td></tr><tr><td>/pages/about-us</td><td>280</td><td>289</td><td>+9 (+3.2%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Blog /blogs/* 成長 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/blogs/網誌專欄</td><td>7</td><td>26</td><td>+19 (+271.4%)</td></tr><tr><td>/blogs/news/客製化馬克杯選購步驟</td><td>12</td><td>29</td><td>+17 (+141.7%)</td></tr><tr><td>/blogs/news/銅板貼紙-防水貼紙-syf客製化禮品</td><td>2</td><td>18</td><td>+16 (+800.0%)</td></tr><tr><td>/blogs/news</td><td>3</td><td>18</td><td>+15 (+500.0%)</td></tr><tr><td>/blogs/news/pvc撕不破防水貼紙</td><td>5</td><td>19</td><td>+14 (+280.0%)</td></tr><tr><td>/blogs/news/客製化便利貼推薦指南</td><td>13</td><td>26</td><td>+13 (+100.0%)</td></tr><tr><td>/blogs/news/常見製作印刷問題集錦_色彩篇_上</td><td>14</td><td>24</td><td>+10 (+71.4%)</td></tr><tr><td>/blogs/製稿說明/墊板製作說明</td><td>9</td><td>19</td><td>+10 (+111.1%)</td></tr><tr><td>/blogs/news/2026三角桌曆推薦款</td><td>5</td><td>13</td><td>+8 (+160.0%)</td></tr><tr><td>/blogs/news/拉鍊袋客製與印刷介紹</td><td>14</td><td>21</td><td>+7 (+50.0%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>Blog /blogs/* 下滑 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/blogs/製稿說明/紙膠帶製作說明</td><td>19</td><td>12</td><td>-7 (-36.8%)</td></tr><tr><td>/blogs/news/推薦五款經濟實惠的客製化商品-低成本高cp值選擇</td><td>4</td><td>1</td><td>-3 (-75.0%)</td></tr><tr><td>/blogs/news/article</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/blogs/news/提升尾牙氣氛-用客製化紀念品讓員工感受企業溫度</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/blogs/news/標籤貼紙-造型貼紙印製-客製化貼紙</td><td>4</td><td>2</td><td>-2 (-50.0%)</td></tr><tr><td>/blogs/news/一張logo無限想像-企業cis識別最佳幫手</td><td>1</td><td>0</td><td>-1 (-100.0%)</td></tr><tr><td>/blogs/news/三角桌曆製作攻略</td><td>4</td><td>3</td><td>-1 (-25.0%)</td></tr><tr><td>/blogs/news/中式信封-客製化信封</td><td>6</td><td>5</td><td>-1 (-16.7%)</td></tr><tr><td>/blogs/news/客製化工商日誌-提升企業形象與效率的最佳選擇</td><td>2</td><td>1</td><td>-1 (-50.0%)</td></tr><tr><td>/blogs/news/客製化隨身碟</td><td>1</td><td>0</td><td>-1 (-100.0%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Meta 來源頁面成長 Top 5（sessions）</h3>
+          <p>這一組不是看 `fbclid` 字串本身，而是看 `date + landingPage + sessionSourceMedium` 中的 Facebook / Instagram / Threads 來源，這比只抓 `fbclid` 穩定。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/拉鍊袋</td><td>1</td><td>5</td><td>+4 (+400.0%)</td></tr><tr><td>/products/56da-0054</td><td>0</td><td>4</td><td>+4 (new)</td></tr><tr><td>/products/60ba-0071</td><td>6</td><td>10</td><td>+4 (+66.7%)</td></tr><tr><td>/products/62da-0024</td><td>0</td><td>3</td><td>+3 (new)</td></tr><tr><td>/collections/獎狀證書區</td><td>0</td><td>2</td><td>+2 (new)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>Meta 來源頁面下滑 Top 5（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/企業客戶合作案例/products/51ka-1000</td><td>4</td><td>0</td><td>-4 (-100.0%)</td></tr><tr><td>/collections/小書包</td><td>3</td><td>0</td><td>-3 (-100.0%)</td></tr><tr><td>/products/62ca-1005</td><td>3</td><td>0</td><td>-3 (-100.0%)</td></tr><tr><td>/collections/壓力球</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/products/32ca-0008</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </section>
     
 
     <div class="two-col">
