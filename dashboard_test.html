@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SYFGIFT 90 天 GA4 / GSC Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif; background: linear-gradient(180deg, #f4f7fb 0%, #eef4ff 100%); color: #172033; }
+    .page { max-width: 1480px; margin: 0 auto; padding: 20px 16px 56px; }
+    .nav { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 14px 16px; margin: -20px -16px 18px; background: rgba(244, 247, 251, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #d8e0ec; }
+    .nav .brand { font-weight: 700; color: #0f172a; margin-right: 10px; }
+    .nav a { text-decoration: none; color: #1d4ed8; background: #fff; border: 1px solid #d8e0ec; border-radius: 999px; padding: 6px 12px; font-size: 13px; }
+    .nav a.switch { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+    h1 { margin: 0 0 6px; font-size: 32px; }
+    .sub { color: #5b6475; font-size: 14px; margin-bottom: 18px; }
+    .note { background: #fff8e6; border: 1px solid #f4d58d; color: #6b4f00; padding: 14px 16px; border-radius: 14px; margin-bottom: 18px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .card, .subcard, section { background: #fff; border: 1px solid #d8e0ec; border-radius: 16px; padding: 16px 18px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05); }
+    .card .label { color: #667085; font-size: 12px; text-transform: uppercase; }
+    .card .value { margin-top: 4px; font-size: 28px; font-weight: 700; }
+    section { margin-bottom: 18px; }
+    section h2 { margin: 0 0 8px; font-size: 20px; }
+    section p { margin: 0 0 14px; color: #5b6475; font-size: 13px; }
+    .toggle-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .toggle-btn { border: 1px solid #cbd5e1; background: #fff; color: #334155; border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; }
+    .toggle-btn.active { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+    .toggle-pane { display: none; }
+    .toggle-pane.active { display: block; }
+    .insight { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #eef6ff; color: #1e3a5f; font-size: 13px; }
+    .chart { width: 100%; min-height: 360px; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+    .two-col > * { min-width: 0; overflow: hidden; }
+    .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.data-table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13px; }
+    .data-table th, .data-table td { border-top: 1px solid #e5eaf2; padding: 10px 8px; text-align: left; vertical-align: top; word-break: break-word; }
+    .data-table th { color: #475467; font-weight: 600; background: #f8fafc; }
+    .data-table tr:first-child th { border-top: 0; }
+    .note-box { border: 1px dashed #f59e0b; background: #fff8e6; color: #7a5100; border-radius: 12px; padding: 14px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="nav">
+      <span class="brand">SYFGIFT GA4</span>
+      <a href="#summary">摘要</a>
+      <a href="#landing">進站頁</a>
+      <a href="#events">事件</a>
+      <a href="#funnels">漏斗</a>
+      <a href="#gsc">GSC</a>
+      <a href="dashboard.html" class="switch">回正式表</a>
+    </div>
+    <h1>SYFGIFT 90 天 GA4 / GSC Dashboard</h1>
+    <div class="sub">GA4 snapshot 2026-05-15 | rebuilt 2026-06-01 10:53:27</div>
+    <div class="note">正式表維持核心圖表穩定，新的 GA 診斷區塊先放在測試表驗證。</div>
+    <div class='note'>這是測試表。新的診斷區塊先在這裡驗證，確認沒問題後再移到正式表。</div>
+
+    <section id="summary">
+      <h2>摘要</h2>
+      <div class="kpi-grid">
+        <div class="card"><div class="label">90-day sessions</div><div class="value">82,282</div></div>
+        <div class="card"><div class="label">Engagement rate</div><div class="value">87.7%</div></div>
+        <div class="card"><div class="label">Estimated inquiry users</div><div class="value">4,130</div></div>
+        <div class="card"><div class="label">Estimated inquiry rate</div><div class="value">5.0%</div></div>
+        <div class="card"><div class="label">GSC clicks</div><div class="value">29,550</div></div>
+        <div class="card"><div class="label">Avg GSC CTR</div><div class="value">2.72%</div></div>
+      </div>
+      <div class="insight">Top channel: Organic Search | 54.1% of sessions. Top clean landing page: /.</div>
+    </section>
+
+    <section id="landing">
+      <h2>Landing Pages</h2>
+      <p>這張圖保留原本的進站頁量體視角；更深入的來源與互動診斷放在測試表下方。</p>
+      <div id="chart_landing" class="chart"></div>
+    </section>
+
+    
+    <section id="ai-referrer">
+      <h2>AI / Referrer 來源表</h2>
+      <p>資料來源：landingPage + pageReferrer。Session = 從該 AI 網站點進來的 sessions；Landing Pages = 被送進的不重複頁面數。</p>
+      
+      <div class="table-wrap"><table class="data-table">
+        <tr><th>來源</th><th>Sessions</th><th>Landing Pages</th><th>Referrer 樣本</th></tr>
+        <tr><td>ChatGPT</td><td>28</td><td>19</td><td>https://chatgpt.com/</td></tr><tr><td>Gemini</td><td>12</td><td>5</td><td>https://gemini.google.com/</td></tr>
+      </table></div>
+    </section>
+    <section id="landing-diagnostics">
+      <h2>Landing Page 深挖區</h2>
+      <p>這一區集中放後續值得深挖的 GA 判讀表，全部都用目前已抓回來的真實資料，不用推估值補空。</p>
+      <div class="subcard">
+        <h3>Landing Page Sessions 排名切換</h3>
+        <p>同樣用 landing page sessions 排名，比對原始排名，以及排除平均停留時間 3 秒內頁面後的排名變化。</p>
+        <div class="toggle-bar">
+          <button class="toggle-btn active" type="button" onclick="toggleLandingRank('raw', this)">原始排名</button>
+          <button class="toggle-btn" type="button" onclick="toggleLandingRank('filtered', this)">排除停留 3 秒內</button>
+        </div>
+        <div id="landing-rank-raw" class="toggle-pane active">
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>Landing Page</th><th>Sessions</th><th>平均停留秒數</th><th>跳出率</th></tr>
+            <tr><td>1</td><td>(not set)</td><td>6,275</td><td>11.1</td><td>91.5%</td></tr><tr><td>2</td><td>/</td><td>5,094</td><td>106.0</td><td>2.6%</td></tr><tr><td>3</td><td>/search</td><td>981</td><td>91.0</td><td>0.8%</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>724</td><td>110.3</td><td>1.0%</td></tr><tr><td>5</td><td>/collections/客製不織布袋</td><td>698</td><td>115.2</td><td>1.7%</td></tr><tr><td>6</td><td>/products/60ba-0071</td><td>678</td><td>30.7</td><td>0.9%</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>648</td><td>67.3</td><td>1.2%</td></tr><tr><td>8</td><td>/collections/vendors</td><td>637</td><td>36.6</td><td>7.7%</td></tr><tr><td>9</td><td>/collections/飲料提袋</td><td>615</td><td>83.6</td><td>1.1%</td></tr><tr><td>10</td><td>/collections/保冷袋</td><td>575</td><td>70.3</td><td>1.2%</td></tr>
+          </table></div>
+        </div>
+        <div id="landing-rank-filtered" class="toggle-pane">
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>Landing Page</th><th>Sessions</th><th>平均停留秒數</th><th>跳出率</th></tr>
+            <tr><td>1</td><td>(not set)</td><td>6,275</td><td>11.1</td><td>91.5%</td></tr><tr><td>2</td><td>/</td><td>5,094</td><td>106.0</td><td>2.6%</td></tr><tr><td>3</td><td>/search</td><td>981</td><td>91.0</td><td>0.8%</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>724</td><td>110.3</td><td>1.0%</td></tr><tr><td>5</td><td>/collections/客製不織布袋</td><td>698</td><td>115.2</td><td>1.7%</td></tr><tr><td>6</td><td>/products/60ba-0071</td><td>678</td><td>30.7</td><td>0.9%</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>648</td><td>67.3</td><td>1.2%</td></tr><tr><td>8</td><td>/collections/vendors</td><td>637</td><td>36.6</td><td>7.7%</td></tr><tr><td>9</td><td>/collections/飲料提袋</td><td>615</td><td>83.6</td><td>1.1%</td></tr><tr><td>10</td><td>/collections/保冷袋</td><td>575</td><td>70.3</td><td>1.2%</td></tr>
+          </table></div>
+        </div>
+        <div class="table-wrap" style="margin-top:12px;"><table class="data-table">
+          <tr><th>Landing Page</th><th>原始排名</th><th>排除後排名</th><th>名次變化</th><th>Sessions</th><th>平均停留秒數</th></tr>
+          <tr><td>(not set)</td><td>1</td><td>1</td><td>0</td><td>6,275</td><td>11.1</td></tr><tr><td>/</td><td>2</td><td>2</td><td>0</td><td>5,094</td><td>106.0</td></tr><tr><td>/search</td><td>3</td><td>3</td><td>0</td><td>981</td><td>91.0</td></tr><tr><td>/collections/收納袋</td><td>4</td><td>4</td><td>0</td><td>724</td><td>110.3</td></tr><tr><td>/collections/客製不織布袋</td><td>5</td><td>5</td><td>0</td><td>698</td><td>115.2</td></tr><tr><td>/products/60ba-0071</td><td>6</td><td>6</td><td>0</td><td>678</td><td>30.7</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>7</td><td>7</td><td>0</td><td>648</td><td>67.3</td></tr><tr><td>/collections/vendors</td><td>8</td><td>8</td><td>0</td><td>637</td><td>36.6</td></tr><tr><td>/collections/飲料提袋</td><td>9</td><td>9</td><td>0</td><td>615</td><td>83.6</td></tr><tr><td>/collections/保冷袋</td><td>10</td><td>10</td><td>0</td><td>575</td><td>70.3</td></tr>
+        </table></div>
+      </div>
+      <div class="subcard">
+        <h3>Landing Page 本月 vs 上月增幅（sessions）</h3>
+        <div class="table-wrap"><table class="data-table">
+          <tr><th>Landing Page</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+          <tr><td>/collections/vendors</td><td>145</td><td>294</td><td>+149 (+102.8%)</td></tr><tr><td>/collections/活動周邊</td><td>50</td><td>97</td><td>+47 (+94.0%)</td></tr><tr><td>/pages/backtoschool</td><td>24</td><td>70</td><td>+46 (+191.7%)</td></tr><tr><td>/collections/面紙包</td><td>77</td><td>118</td><td>+41 (+53.2%)</td></tr><tr><td>/pages/exhibition-gifts</td><td>92</td><td>133</td><td>+41 (+44.6%)</td></tr><tr><td>/products/60za-0617</td><td>1</td><td>39</td><td>+38 (+3800.0%)</td></tr><tr><td>/collections/客製隨身碟</td><td>45</td><td>80</td><td>+35 (+77.8%)</td></tr><tr><td>/products/56wa-0122</td><td>0</td><td>33</td><td>+33 (new)</td></tr><tr><td>/products/59ka-0013</td><td>0</td><td>33</td><td>+33 (new)</td></tr><tr><td>/collections/廣告扇</td><td>140</td><td>172</td><td>+32 (+22.9%)</td></tr>
+        </table></div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Landing Page → 後續互動分佈</h3>
+          <p>這張表已改用 `landingPage + eventName` 真資料，直接看哪些入口頁有搜尋與 LINE 行為。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Landing Page</th><th>Sessions</th><th>Search</th><th>LINE</th></tr>
+            <tr><td>/collections/客製不織布袋</td><td>746</td><td>78</td><td>113</td></tr><tr><td>/collections/收納袋</td><td>791</td><td>60</td><td>108</td></tr><tr><td>/collections/帆布袋</td><td>430</td><td>45</td><td>83</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>704</td><td>55</td><td>79</td></tr><tr><td>/collections/馬克杯</td><td>606</td><td>55</td><td>76</td></tr><tr><td>/collections/飲料提袋</td><td>672</td><td>48</td><td>69</td></tr><tr><td>/collections/l型資料夾</td><td>346</td><td>36</td><td>63</td></tr><tr><td>/collections/廣告扇</td><td>415</td><td>35</td><td>62</td></tr><tr><td>/collections/保冷袋</td><td>575</td><td>19</td><td>62</td></tr><tr><td>/collections/廣告筆</td><td>250</td><td>22</td><td>52</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>站內搜尋字</h3>
+          <p>這張表目前顯示 `searchTerm + eventName` 可見到的搜尋與表單事件，方便先看哪些搜尋字有量。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Search Term</th><th>Search</th><th>Results</th><th>Form Start</th><th>Form Submit</th><th>Submit Rate</th></tr>
+            <tr><td>鑰匙圈</td><td>233</td><td>233</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>磁鐵</td><td>176</td><td>178</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>隨身碟</td><td>158</td><td>161</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>杯</td><td>146</td><td>146</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>筆</td><td>129</td><td>130</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>便利貼</td><td>125</td><td>127</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>馬克杯</td><td>119</td><td>120</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>便條紙</td><td>118</td><td>119</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>筆記本</td><td>106</td><td>107</td><td>0</td><td>0</td><td>0.0%</td></tr><tr><td>不織布</td><td>104</td><td>104</td><td>0</td><td>0</td><td>0.0%</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </section>
+    <section id="landing-b4">
+      <h2>Landing Page 對應 B4 核心分類</h2>
+      <p>這張表把目前 landing page 對到 B4 分類資料；對得到就顯示核心分類，對不到就保留 unmatched，不亂猜。</p>
+      <div class="table-wrap"><table class="data-table">
+        <tr><th>Landing Page</th><th>Sessions</th><th>對應狀態</th><th>B4 核心分類</th><th>類別編號</th><th>所屬新大類</th></tr>
+        <tr><td>(not set)</td><td>6,275</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/</td><td>5,094</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/search</td><td>981</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/collections/收納袋</td><td>724</td><td>exact_name</td><td>56GA 收納袋</td><td>56GA 收納袋</td><td>A-提袋背包</td></tr><tr><td>/collections/客製不織布袋</td><td>698</td><td>fuzzy_core_name</td><td>56AA 不織布袋</td><td>56AC 覆膜防水袋</td><td>A-提袋背包</td></tr><tr><td>/products/60ba-0071</td><td>678</td><td>product_code</td><td>60BA 磁鐵冰箱貼</td><td>60BA 磁鐵冰箱貼</td><td>E-活動廣告</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>648</td><td>exact_name</td><td>60BA 磁鐵冰箱貼</td><td>60BA 磁鐵冰箱貼</td><td>E-活動廣告</td></tr><tr><td>/collections/vendors</td><td>637</td><td>unmatched</td><td></td><td></td><td></td></tr><tr><td>/collections/飲料提袋</td><td>615</td><td>exact_name</td><td>59KA 飲料提袋</td><td>59KA 飲料提袋</td><td>B-杯子杯墊</td></tr><tr><td>/collections/保冷袋</td><td>575</td><td>exact_name</td><td>56FA 保冷袋</td><td>56FA 保冷袋</td><td>A-提袋背包</td></tr>
+      </table></div>
+    </section>
+    <section id="page-session-ranking">
+      <h2>頁面 Session 排名與月增幅</h2>
+      <p>這一組表的 metric 都是 `sessions`；`Sessions` 來自 GA4，`GSC Clicks` 則是同頁面在同報表期間的 GSC 點擊，並列對照，不是混成同一個數字。</p>
+      <div class="two-col">
+        <div class="subcard">
+          <h3>目前頁面 Session 排名</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>Rank</th><th>頁面</th><th>Sessions</th><th>GSC Clicks</th><th>B4 核心分類</th></tr>
+            <tr><td>1</td><td>/pages/request-for-quote</td><td>2,332</td><td>0</td><td></td></tr><tr><td>2</td><td>/collections/vendors</td><td>1,401</td><td>9</td><td></td></tr><tr><td>3</td><td>/collections/客製不織布袋</td><td>1,158</td><td>555</td><td>56AA 不織布袋</td></tr><tr><td>4</td><td>/collections/收納袋</td><td>1,110</td><td>660</td><td>56GA 收納袋</td></tr><tr><td>5</td><td>/pages/about-us</td><td>885</td><td>71</td><td></td></tr><tr><td>6</td><td>/collections/飲料提袋</td><td>877</td><td>575</td><td>59KA 飲料提袋</td></tr><tr><td>7</td><td>/collections/磁鐵冰箱貼</td><td>870</td><td>589</td><td>60BA 磁鐵冰箱貼</td></tr><tr><td>8</td><td>/collections/帆布袋</td><td>856</td><td>273</td><td>56CA 帆布袋</td></tr><tr><td>9</td><td>/collections/企業客戶合作案例</td><td>825</td><td>0</td><td></td></tr><tr><td>10</td><td>/collections/馬克杯</td><td>782</td><td>462</td><td>59AA 馬克杯</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>本月 vs 上月成長最多頁面 Top 10（sessions）</h3>
+          <p>202604 vs 202605</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/vendors</td><td>379</td><td>543</td><td>+164 (+43.3%)</td></tr><tr><td>/pages/backtoschool</td><td>57</td><td>117</td><td>+60 (+105.3%)</td></tr><tr><td>/collections/活動周邊</td><td>67</td><td>124</td><td>+57 (+85.1%)</td></tr><tr><td>/collections/廣告扇</td><td>161</td><td>216</td><td>+55 (+34.2%)</td></tr><tr><td>/collections/l型資料夾</td><td>144</td><td>193</td><td>+49 (+34.0%)</td></tr><tr><td>/collections/馬克杯</td><td>235</td><td>282</td><td>+47 (+20.0%)</td></tr><tr><td>/collections/面紙包</td><td>97</td><td>143</td><td>+46 (+47.4%)</td></tr><tr><td>/collections/客製隨身碟</td><td>52</td><td>94</td><td>+42 (+80.8%)</td></tr><tr><td>/collections/趣味玩樂</td><td>33</td><td>75</td><td>+42 (+127.3%)</td></tr><tr><td>/products/60za-0617</td><td>1</td><td>43</td><td>+42 (+4200.0%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>本月 vs 上月下滑最多頁面 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/products/59ea-0003</td><td>124</td><td>5</td><td>-119 (-96.0%)</td></tr><tr><td>/products/53aa-1241</td><td>87</td><td>5</td><td>-82 (-94.3%)</td></tr><tr><td>/collections/收納袋</td><td>413</td><td>339</td><td>-74 (-17.9%)</td></tr><tr><td>/collections/客製不織布袋</td><td>390</td><td>319</td><td>-71 (-18.2%)</td></tr><tr><td>/collections/胸章徽章</td><td>173</td><td>108</td><td>-65 (-37.6%)</td></tr><tr><td>/collections/燙布貼</td><td>218</td><td>161</td><td>-57 (-26.1%)</td></tr><tr><td>/collections/飲料提袋</td><td>336</td><td>279</td><td>-57 (-17.0%)</td></tr><tr><td>/collections/磁鐵冰箱貼</td><td>294</td><td>238</td><td>-56 (-19.0%)</td></tr><tr><td>/products/65da-0062</td><td>153</td><td>101</td><td>-52 (-34.0%)</td></tr><tr><td>/collections/金屬書籤/products/51za-0603</td><td>49</td><td>5</td><td>-44 (-89.8%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>自訂頁 /pages/* 成長 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/pages/backtoschool</td><td>57</td><td>117</td><td>+60 (+105.3%)</td></tr><tr><td>/pages/exhibition-gifts</td><td>205</td><td>242</td><td>+37 (+18.0%)</td></tr><tr><td>/pages/廣告扇</td><td>6</td><td>38</td><td>+32 (+533.3%)</td></tr><tr><td>/pages/request-for-quote</td><td>731</td><td>760</td><td>+29 (+4.0%)</td></tr><tr><td>/pages/healthcare_expo</td><td>33</td><td>60</td><td>+27 (+81.8%)</td></tr><tr><td>/pages/客製化usb風扇</td><td>0</td><td>24</td><td>+24 (new)</td></tr><tr><td>/pages/summer_sale</td><td>50</td><td>71</td><td>+21 (+42.0%)</td></tr><tr><td>/pages/客製化傳輸線</td><td>10</td><td>29</td><td>+19 (+190.0%)</td></tr><tr><td>/pages/2025國際茶-咖啡展-酒展</td><td>34</td><td>52</td><td>+18 (+52.9%)</td></tr><tr><td>/pages/客製化水瓶</td><td>26</td><td>40</td><td>+14 (+53.8%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>自訂頁 /pages/* 下滑 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/pages/downloads</td><td>86</td><td>77</td><td>-9 (-10.5%)</td></tr><tr><td>/pages/privacy-policy-statement</td><td>5</td><td>2</td><td>-3 (-60.0%)</td></tr><tr><td>/pages/客製環保餐具</td><td>64</td><td>61</td><td>-3 (-4.7%)</td></tr><tr><td>/pages/書籍估價系統</td><td>11</td><td>8</td><td>-3 (-27.3%)</td></tr><tr><td>/pages/reviews</td><td>240</td><td>242</td><td>+2 (+0.8%)</td></tr><tr><td>/pages/購物需知</td><td>18</td><td>20</td><td>+2 (+11.1%)</td></tr><tr><td>/pages/退換貨政策</td><td>4</td><td>7</td><td>+3 (+75.0%)</td></tr><tr><td>/pages/客製行動電源</td><td>41</td><td>46</td><td>+5 (+12.2%)</td></tr><tr><td>/pages/2025台北婦幼展活動周邊禮贈品</td><td>34</td><td>40</td><td>+6 (+17.6%)</td></tr><tr><td>/pages/about-us</td><td>280</td><td>289</td><td>+9 (+3.2%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Blog /blogs/* 成長 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/blogs/網誌專欄</td><td>7</td><td>26</td><td>+19 (+271.4%)</td></tr><tr><td>/blogs/news/客製化馬克杯選購步驟</td><td>12</td><td>29</td><td>+17 (+141.7%)</td></tr><tr><td>/blogs/news/銅板貼紙-防水貼紙-syf客製化禮品</td><td>2</td><td>18</td><td>+16 (+800.0%)</td></tr><tr><td>/blogs/news</td><td>3</td><td>18</td><td>+15 (+500.0%)</td></tr><tr><td>/blogs/news/pvc撕不破防水貼紙</td><td>5</td><td>19</td><td>+14 (+280.0%)</td></tr><tr><td>/blogs/news/客製化便利貼推薦指南</td><td>13</td><td>26</td><td>+13 (+100.0%)</td></tr><tr><td>/blogs/news/常見製作印刷問題集錦_色彩篇_上</td><td>14</td><td>24</td><td>+10 (+71.4%)</td></tr><tr><td>/blogs/製稿說明/墊板製作說明</td><td>9</td><td>19</td><td>+10 (+111.1%)</td></tr><tr><td>/blogs/news/2026三角桌曆推薦款</td><td>5</td><td>13</td><td>+8 (+160.0%)</td></tr><tr><td>/blogs/news/拉鍊袋客製與印刷介紹</td><td>14</td><td>21</td><td>+7 (+50.0%)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>Blog /blogs/* 下滑 Top 10（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/blogs/製稿說明/紙膠帶製作說明</td><td>19</td><td>12</td><td>-7 (-36.8%)</td></tr><tr><td>/blogs/news/推薦五款經濟實惠的客製化商品-低成本高cp值選擇</td><td>4</td><td>1</td><td>-3 (-75.0%)</td></tr><tr><td>/blogs/news/article</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/blogs/news/提升尾牙氣氛-用客製化紀念品讓員工感受企業溫度</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/blogs/news/標籤貼紙-造型貼紙印製-客製化貼紙</td><td>4</td><td>2</td><td>-2 (-50.0%)</td></tr><tr><td>/blogs/news/一張logo無限想像-企業cis識別最佳幫手</td><td>1</td><td>0</td><td>-1 (-100.0%)</td></tr><tr><td>/blogs/news/三角桌曆製作攻略</td><td>4</td><td>3</td><td>-1 (-25.0%)</td></tr><tr><td>/blogs/news/中式信封-客製化信封</td><td>6</td><td>5</td><td>-1 (-16.7%)</td></tr><tr><td>/blogs/news/客製化工商日誌-提升企業形象與效率的最佳選擇</td><td>2</td><td>1</td><td>-1 (-50.0%)</td></tr><tr><td>/blogs/news/客製化隨身碟</td><td>1</td><td>0</td><td>-1 (-100.0%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="subcard">
+          <h3>Meta 來源頁面成長 Top 5（sessions）</h3>
+          <p>這一組不是看 `fbclid` 字串本身，而是看 `date + landingPage + sessionSourceMedium` 中的 Facebook / Instagram / Threads 來源，這比只抓 `fbclid` 穩定。</p>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/拉鍊袋</td><td>1</td><td>5</td><td>+4 (+400.0%)</td></tr><tr><td>/products/56da-0054</td><td>0</td><td>4</td><td>+4 (new)</td></tr><tr><td>/products/60ba-0071</td><td>6</td><td>10</td><td>+4 (+66.7%)</td></tr><tr><td>/products/62da-0024</td><td>0</td><td>3</td><td>+3 (new)</td></tr><tr><td>/collections/獎狀證書區</td><td>0</td><td>2</td><td>+2 (new)</td></tr>
+          </table></div>
+        </div>
+        <div class="subcard">
+          <h3>Meta 來源頁面下滑 Top 5（sessions）</h3>
+          <div class="table-wrap"><table class="data-table">
+            <tr><th>頁面</th><th>上月 sessions</th><th>本月 sessions</th><th>增減</th></tr>
+            <tr><td>/collections/企業客戶合作案例/products/51ka-1000</td><td>4</td><td>0</td><td>-4 (-100.0%)</td></tr><tr><td>/collections/小書包</td><td>3</td><td>0</td><td>-3 (-100.0%)</td></tr><tr><td>/products/62ca-1005</td><td>3</td><td>0</td><td>-3 (-100.0%)</td></tr><tr><td>/collections/壓力球</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr><tr><td>/products/32ca-0008</td><td>2</td><td>0</td><td>-2 (-100.0%)</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </section>
+    
+
+    <div class="two-col">
+      <section id="events">
+        <h2>Top Events</h2>
+        <div id="chart_events" class="chart"></div>
+      </section>
+      <section id="funnels">
+        <h2>Funnels</h2>
+        <div id="chart_funnel_form" class="chart"></div>
+        <div id="chart_funnel_line" class="chart"></div>
+      </section>
+    </div>
+
+    <section id="gsc">
+      <h2>Google Search Console</h2>
+      <div id="chart_gsc_daily" class="chart"></div>
+      <div class="two-col">
+        <div class="subcard">
+          <h3>熱門頁面（GSC page dimension）</h3>
+          <p>每一列代表一個網站頁面 URL / path，資料維度來自 Google Search Console 的 page dimension。</p>
+          <div id="chart_gsc_pages" class="chart"></div>
+        </div>
+        <div class="subcard">
+          <h3>裝置</h3>
+          <div id="chart_gsc_devices" class="chart"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+<script>
+const landingPages = [{"page": "(not set)", "sessions": 6275, "engagedSessions": 534, "userEngagementDuration": 69610, "screenPageViews": 0, "bounceRate": 0.915, "avg_engagement_sec": 11.1, "is_bot_suspect": true, "label": "(not set)", "group_code": "not_set", "group_label": "(not set) / 未設定"}, {"page": "/", "sessions": 5094, "engagedSessions": 4964, "userEngagementDuration": 539901, "screenPageViews": 46966, "bounceRate": 0.026, "avg_engagement_sec": 106.0, "is_bot_suspect": false, "label": "首頁 /", "group_code": "home", "group_label": "首頁 /"}, {"page": "/search", "sessions": 981, "engagedSessions": 973, "userEngagementDuration": 89266, "screenPageViews": 9579, "bounceRate": 0.008, "avg_engagement_sec": 91.0, "is_bot_suspect": false, "label": "search", "group_code": "search", "group_label": "搜尋頁 /search"}, {"page": "/collections/收納袋", "sessions": 724, "engagedSessions": 717, "userEngagementDuration": 79843, "screenPageViews": 6923, "bounceRate": 0.01, "avg_engagement_sec": 110.3, "is_bot_suspect": false, "label": "收納袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/客製不織布袋", "sessions": 698, "engagedSessions": 686, "userEngagementDuration": 80378, "screenPageViews": 5522, "bounceRate": 0.017, "avg_engagement_sec": 115.2, "is_bot_suspect": false, "label": "客製不織布袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/products/60ba-0071", "sessions": 678, "engagedSessions": 672, "userEngagementDuration": 20785, "screenPageViews": 2326, "bounceRate": 0.009, "avg_engagement_sec": 30.7, "is_bot_suspect": false, "label": "60ba-0071", "group_code": "product", "group_label": "商品頁 /products/*"}, {"page": "/collections/磁鐵冰箱貼", "sessions": 648, "engagedSessions": 640, "userEngagementDuration": 43579, "screenPageViews": 3744, "bounceRate": 0.012, "avg_engagement_sec": 67.3, "is_bot_suspect": false, "label": "磁鐵冰箱貼", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/vendors", "sessions": 637, "engagedSessions": 588, "userEngagementDuration": 23342, "screenPageViews": 3236, "bounceRate": 0.077, "avg_engagement_sec": 36.6, "is_bot_suspect": false, "label": "vendors", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/飲料提袋", "sessions": 615, "engagedSessions": 608, "userEngagementDuration": 51394, "screenPageViews": 4340, "bounceRate": 0.011, "avg_engagement_sec": 83.6, "is_bot_suspect": false, "label": "飲料提袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/保冷袋", "sessions": 575, "engagedSessions": 568, "userEngagementDuration": 40440, "screenPageViews": 3348, "bounceRate": 0.012, "avg_engagement_sec": 70.3, "is_bot_suspect": false, "label": "保冷袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/馬克杯", "sessions": 558, "engagedSessions": 549, "userEngagementDuration": 70694, "screenPageViews": 5736, "bounceRate": 0.016, "avg_engagement_sec": 126.7, "is_bot_suspect": false, "label": "馬克杯", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/燙布貼", "sessions": 533, "engagedSessions": 522, "userEngagementDuration": 19347, "screenPageViews": 2066, "bounceRate": 0.021, "avg_engagement_sec": 36.3, "is_bot_suspect": false, "label": "燙布貼", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/撲克牌", "sessions": 457, "engagedSessions": 453, "userEngagementDuration": 21943, "screenPageViews": 2204, "bounceRate": 0.009, "avg_engagement_sec": 48.0, "is_bot_suspect": false, "label": "撲克牌", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/帆布袋", "sessions": 400, "engagedSessions": 394, "userEngagementDuration": 43604, "screenPageViews": 3786, "bounceRate": 0.015, "avg_engagement_sec": 109.0, "is_bot_suspect": false, "label": "帆布袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/便條紙便利貼", "sessions": 334, "engagedSessions": 331, "userEngagementDuration": 37828, "screenPageViews": 3117, "bounceRate": 0.009, "avg_engagement_sec": 113.3, "is_bot_suspect": false, "label": "便條紙便利貼", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/廣告扇", "sessions": 329, "engagedSessions": 327, "userEngagementDuration": 32106, "screenPageViews": 2269, "bounceRate": 0.006, "avg_engagement_sec": 97.6, "is_bot_suspect": false, "label": "廣告扇", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/l型資料夾", "sessions": 317, "engagedSessions": 314, "userEngagementDuration": 30106, "screenPageViews": 2196, "bounceRate": 0.009, "avg_engagement_sec": 95.0, "is_bot_suspect": false, "label": "l型資料夾", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/胸章徽章", "sessions": 313, "engagedSessions": 308, "userEngagementDuration": 23870, "screenPageViews": 2032, "bounceRate": 0.016, "avg_engagement_sec": 76.3, "is_bot_suspect": false, "label": "胸章徽章", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/壓力球", "sessions": 311, "engagedSessions": 309, "userEngagementDuration": 30614, "screenPageViews": 2938, "bounceRate": 0.006, "avg_engagement_sec": 98.4, "is_bot_suspect": false, "label": "壓力球", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/pvc夾鏈袋", "sessions": 301, "engagedSessions": 299, "userEngagementDuration": 23805, "screenPageViews": 2215, "bounceRate": 0.007, "avg_engagement_sec": 79.1, "is_bot_suspect": false, "label": "pvc夾鏈袋", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/行李吊牌", "sessions": 286, "engagedSessions": 286, "userEngagementDuration": 19670, "screenPageViews": 1702, "bounceRate": 0.0, "avg_engagement_sec": 68.8, "is_bot_suspect": false, "label": "行李吊牌", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/吊牌印刷", "sessions": 285, "engagedSessions": 283, "userEngagementDuration": 15997, "screenPageViews": 1118, "bounceRate": 0.007, "avg_engagement_sec": 56.1, "is_bot_suspect": false, "label": "吊牌印刷", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/pages/exhibition-gifts", "sessions": 283, "engagedSessions": 279, "userEngagementDuration": 35925, "screenPageViews": 2219, "bounceRate": 0.014, "avg_engagement_sec": 126.9, "is_bot_suspect": false, "label": "exhibition-gifts", "group_code": "page", "group_label": "自訂頁 /pages/*"}, {"page": "/collections/環保餐具", "sessions": 274, "engagedSessions": 268, "userEngagementDuration": 21976, "screenPageViews": 1784, "bounceRate": 0.022, "avg_engagement_sec": 80.2, "is_bot_suspect": false, "label": "環保餐具", "group_code": "collection", "group_label": "分類頁 /collections/*"}, {"page": "/collections/鑰匙圈", "sessions": 265, "engagedSessions": 262, "userEngagementDuration": 22852, "screenPageViews": 1952, "bounceRate": 0.011, "avg_engagement_sec": 86.2, "is_bot_suspect": false, "label": "鑰匙圈", "group_code": "collection", "group_label": "分類頁 /collections/*"}];
+const events = [{"event": "page_view", "eventCount": 365264, "totalUsers": 62365}, {"event": "scroll", "eventCount": 174773, "totalUsers": 28694}, {"event": "product_picture", "eventCount": 141644, "totalUsers": 12492}, {"event": "view_item", "eventCount": 88806, "totalUsers": 46150}, {"event": "user_engagement", "eventCount": 87541, "totalUsers": 30522}, {"event": "session_start", "eventCount": 80548, "totalUsers": 60668}, {"event": "first_visit", "eventCount": 59878, "totalUsers": 59515}, {"event": "分類頁上下頁點擊", "eventCount": 27836, "totalUsers": 5363}, {"event": "collection_product", "eventCount": 21295, "totalUsers": 7811}, {"event": "view_search_results", "eventCount": 13196, "totalUsers": 3184}, {"event": "form_start", "eventCount": 12163, "totalUsers": 4868}, {"event": "search", "eventCount": 11421, "totalUsers": 2456}, {"event": "點擊頁面L3", "eventCount": 10876, "totalUsers": 2726}, {"event": "LINE點擊轉換", "eventCount": 5421, "totalUsers": 3557}, {"event": "form_submit", "eventCount": 5212, "totalUsers": 2099}, {"event": "LINE_CHAT_HOVER", "eventCount": 4239, "totalUsers": 2914}, {"event": "網站行為_點擊產品頁推薦商品", "eventCount": 4032, "totalUsers": 2118}, {"event": "event_sort", "eventCount": 3888, "totalUsers": 1317}, {"event": "event_filter", "eventCount": 3565, "totalUsers": 1433}, {"event": "網站行為_點擊產品頁QA", "eventCount": 3145, "totalUsers": 1539}];
+const funnelForm = [{"step": "1. session_start", "users": 54187, "completionRate": 0.609, "abandoned": 21167, "abandonRate": 0.391}, {"step": "2. view_item", "users": 33020, "completionRate": 0.111, "abandoned": 29358, "abandonRate": 0.889}, {"step": "3. form_start", "users": 3662, "completionRate": 0.392, "abandoned": 2228, "abandonRate": 0.608}, {"step": "4. form_submit", "users": 1434, "completionRate": 1.0, "abandoned": 0, "abandonRate": 0.0}];
+const funnelLine = [{"step": "1. session_start", "users": 54200, "completionRate": 0.61, "abandoned": 21159, "abandonRate": 0.39}, {"step": "2. view_item", "users": 33041, "completionRate": 0.082, "abandoned": 30345, "abandonRate": 0.918}, {"step": "3. LINE點擊轉換", "users": 2696, "completionRate": 1.0, "abandoned": 0, "abandonRate": 0.0}];
+const gscDaily = [{"date": "2026-02-16", "clicks": 82, "impressions": 5171, "ctr": 1.59, "position": 9.1}, {"date": "2026-02-17", "clicks": 66, "impressions": 6407, "ctr": 1.03, "position": 8.7}, {"date": "2026-02-18", "clicks": 68, "impressions": 5673, "ctr": 1.2, "position": 8.9}, {"date": "2026-02-19", "clicks": 78, "impressions": 5779, "ctr": 1.35, "position": 9.0}, {"date": "2026-02-20", "clicks": 114, "impressions": 6394, "ctr": 1.78, "position": 8.4}, {"date": "2026-02-21", "clicks": 128, "impressions": 6975, "ctr": 1.84, "position": 8.2}, {"date": "2026-02-22", "clicks": 308, "impressions": 10942, "ctr": 2.81, "position": 7.7}, {"date": "2026-02-23", "clicks": 461, "impressions": 13569, "ctr": 3.4, "position": 7.4}, {"date": "2026-02-24", "clicks": 422, "impressions": 13492, "ctr": 3.13, "position": 6.9}, {"date": "2026-02-25", "clicks": 439, "impressions": 13670, "ctr": 3.21, "position": 7.2}, {"date": "2026-02-26", "clicks": 206, "impressions": 9509, "ctr": 2.17, "position": 7.8}, {"date": "2026-02-27", "clicks": 141, "impressions": 8172, "ctr": 1.73, "position": 8.2}, {"date": "2026-02-28", "clicks": 152, "impressions": 7624, "ctr": 1.99, "position": 7.8}, {"date": "2026-03-01", "clicks": 330, "impressions": 12177, "ctr": 2.71, "position": 7.0}, {"date": "2026-03-02", "clicks": 417, "impressions": 14256, "ctr": 2.93, "position": 7.1}, {"date": "2026-03-03", "clicks": 430, "impressions": 13921, "ctr": 3.09, "position": 6.8}, {"date": "2026-03-04", "clicks": 419, "impressions": 14228, "ctr": 2.94, "position": 6.5}, {"date": "2026-03-05", "clicks": 418, "impressions": 14448, "ctr": 2.89, "position": 6.8}, {"date": "2026-03-06", "clicks": 232, "impressions": 9845, "ctr": 2.36, "position": 7.2}, {"date": "2026-03-07", "clicks": 170, "impressions": 7981, "ctr": 2.13, "position": 6.8}, {"date": "2026-03-08", "clicks": 322, "impressions": 11071, "ctr": 2.91, "position": 6.5}, {"date": "2026-03-09", "clicks": 452, "impressions": 14073, "ctr": 3.21, "position": 6.6}, {"date": "2026-03-10", "clicks": 519, "impressions": 14463, "ctr": 3.59, "position": 6.4}, {"date": "2026-03-11", "clicks": 448, "impressions": 14463, "ctr": 3.1, "position": 6.3}, {"date": "2026-03-12", "clicks": 446, "impressions": 14579, "ctr": 3.06, "position": 6.5}, {"date": "2026-03-13", "clicks": 320, "impressions": 11004, "ctr": 2.91, "position": 7.0}, {"date": "2026-03-14", "clicks": 180, "impressions": 9055, "ctr": 1.99, "position": 7.0}, {"date": "2026-03-15", "clicks": 388, "impressions": 14829, "ctr": 2.62, "position": 6.4}, {"date": "2026-03-16", "clicks": 474, "impressions": 15906, "ctr": 2.98, "position": 6.7}, {"date": "2026-03-17", "clicks": 437, "impressions": 14620, "ctr": 2.99, "position": 6.4}, {"date": "2026-03-18", "clicks": 404, "impressions": 14225, "ctr": 2.84, "position": 6.6}, {"date": "2026-03-19", "clicks": 476, "impressions": 14839, "ctr": 3.21, "position": 6.8}, {"date": "2026-03-20", "clicks": 260, "impressions": 10728, "ctr": 2.42, "position": 7.1}, {"date": "2026-03-21", "clicks": 181, "impressions": 9935, "ctr": 1.82, "position": 7.5}, {"date": "2026-03-22", "clicks": 357, "impressions": 13933, "ctr": 2.56, "position": 7.0}, {"date": "2026-03-23", "clicks": 481, "impressions": 15758, "ctr": 3.05, "position": 6.4}, {"date": "2026-03-24", "clicks": 481, "impressions": 15572, "ctr": 3.09, "position": 6.3}, {"date": "2026-03-25", "clicks": 445, "impressions": 15216, "ctr": 2.92, "position": 6.3}, {"date": "2026-03-26", "clicks": 477, "impressions": 14752, "ctr": 3.23, "position": 6.4}, {"date": "2026-03-27", "clicks": 301, "impressions": 11226, "ctr": 2.68, "position": 6.7}, {"date": "2026-03-28", "clicks": 187, "impressions": 9958, "ctr": 1.88, "position": 7.1}, {"date": "2026-03-29", "clicks": 353, "impressions": 13079, "ctr": 2.7, "position": 6.3}, {"date": "2026-03-30", "clicks": 471, "impressions": 16041, "ctr": 2.94, "position": 6.7}, {"date": "2026-03-31", "clicks": 451, "impressions": 14567, "ctr": 3.1, "position": 6.2}, {"date": "2026-04-01", "clicks": 418, "impressions": 13257, "ctr": 3.15, "position": 6.1}, {"date": "2026-04-02", "clicks": 261, "impressions": 9702, "ctr": 2.69, "position": 6.4}, {"date": "2026-04-03", "clicks": 166, "impressions": 8045, "ctr": 2.06, "position": 6.6}, {"date": "2026-04-04", "clicks": 185, "impressions": 7505, "ctr": 2.47, "position": 6.3}, {"date": "2026-04-05", "clicks": 176, "impressions": 8065, "ctr": 2.18, "position": 6.4}, {"date": "2026-04-06", "clicks": 337, "impressions": 11586, "ctr": 2.91, "position": 6.3}, {"date": "2026-04-07", "clicks": 470, "impressions": 13989, "ctr": 3.36, "position": 6.1}, {"date": "2026-04-08", "clicks": 442, "impressions": 13965, "ctr": 3.17, "position": 6.3}, {"date": "2026-04-09", "clicks": 405, "impressions": 13357, "ctr": 3.03, "position": 6.4}, {"date": "2026-04-10", "clicks": 285, "impressions": 10075, "ctr": 2.83, "position": 6.5}, {"date": "2026-04-11", "clicks": 164, "impressions": 8114, "ctr": 2.02, "position": 7.0}, {"date": "2026-04-12", "clicks": 308, "impressions": 11478, "ctr": 2.68, "position": 6.6}, {"date": "2026-04-13", "clicks": 453, "impressions": 14035, "ctr": 3.23, "position": 6.5}, {"date": "2026-04-14", "clicks": 448, "impressions": 13476, "ctr": 3.32, "position": 6.0}, {"date": "2026-04-15", "clicks": 432, "impressions": 13763, "ctr": 3.14, "position": 6.4}, {"date": "2026-04-16", "clicks": 407, "impressions": 12649, "ctr": 3.22, "position": 6.5}, {"date": "2026-04-17", "clicks": 239, "impressions": 9367, "ctr": 2.55, "position": 7.2}, {"date": "2026-04-18", "clicks": 177, "impressions": 8497, "ctr": 2.08, "position": 7.2}, {"date": "2026-04-19", "clicks": 338, "impressions": 11820, "ctr": 2.86, "position": 6.8}, {"date": "2026-04-20", "clicks": 467, "impressions": 13463, "ctr": 3.47, "position": 6.8}, {"date": "2026-04-21", "clicks": 486, "impressions": 13256, "ctr": 3.67, "position": 7.1}, {"date": "2026-04-22", "clicks": 454, "impressions": 13558, "ctr": 3.35, "position": 7.1}, {"date": "2026-04-23", "clicks": 399, "impressions": 13257, "ctr": 3.01, "position": 7.2}, {"date": "2026-04-24", "clicks": 247, "impressions": 9553, "ctr": 2.59, "position": 7.6}, {"date": "2026-04-25", "clicks": 133, "impressions": 7760, "ctr": 1.71, "position": 7.9}, {"date": "2026-04-26", "clicks": 331, "impressions": 11443, "ctr": 2.89, "position": 7.4}, {"date": "2026-04-27", "clicks": 411, "impressions": 13029, "ctr": 3.15, "position": 7.4}, {"date": "2026-04-28", "clicks": 403, "impressions": 12894, "ctr": 3.13, "position": 7.4}, {"date": "2026-04-29", "clicks": 400, "impressions": 12377, "ctr": 3.23, "position": 7.4}, {"date": "2026-04-30", "clicks": 239, "impressions": 8840, "ctr": 2.7, "position": 8.2}, {"date": "2026-05-01", "clicks": 147, "impressions": 7372, "ctr": 1.99, "position": 8.8}, {"date": "2026-05-02", "clicks": 150, "impressions": 7354, "ctr": 2.04, "position": 8.4}, {"date": "2026-05-03", "clicks": 309, "impressions": 10437, "ctr": 2.96, "position": 8.0}, {"date": "2026-05-04", "clicks": 381, "impressions": 12416, "ctr": 3.07, "position": 8.0}, {"date": "2026-05-05", "clicks": 397, "impressions": 13393, "ctr": 2.96, "position": 7.6}, {"date": "2026-05-06", "clicks": 417, "impressions": 13776, "ctr": 3.03, "position": 7.9}, {"date": "2026-05-07", "clicks": 396, "impressions": 12333, "ctr": 3.21, "position": 7.8}, {"date": "2026-05-08", "clicks": 244, "impressions": 9033, "ctr": 2.7, "position": 8.3}, {"date": "2026-05-09", "clicks": 140, "impressions": 7686, "ctr": 1.82, "position": 8.6}, {"date": "2026-05-10", "clicks": 306, "impressions": 10511, "ctr": 2.91, "position": 7.9}, {"date": "2026-05-11", "clicks": 459, "impressions": 13240, "ctr": 3.47, "position": 8.1}, {"date": "2026-05-12", "clicks": 436, "impressions": 13184, "ctr": 3.31, "position": 7.6}, {"date": "2026-05-13", "clicks": 426, "impressions": 13484, "ctr": 3.16, "position": 7.9}, {"date": "2026-05-14", "clicks": 409, "impressions": 13417, "ctr": 3.05, "position": 7.4}, {"date": "2026-05-15", "clicks": 274, "impressions": 9350, "ctr": 2.93, "position": 7.4}, {"date": "2026-05-16", "clicks": 186, "impressions": 7723, "ctr": 2.41, "position": 7.5}];
+const gscPages = [{"path": "/", "label": "首頁 /", "clicks": 2330, "impressions": 45153, "ctr": 5.16, "position": 7.7}, {"path": "/collections/收納袋", "label": "收納袋", "clicks": 660, "impressions": 17904, "ctr": 3.69, "position": 7.6}, {"path": "/collections/磁鐵冰箱貼", "label": "磁鐵冰箱貼", "clicks": 589, "impressions": 17431, "ctr": 3.38, "position": 4.5}, {"path": "/collections/飲料提袋", "label": "飲料提袋", "clicks": 575, "impressions": 17578, "ctr": 3.27, "position": 5.6}, {"path": "/collections/客製不織布袋", "label": "客製不織布袋", "clicks": 555, "impressions": 18195, "ctr": 3.05, "position": 7.1}, {"path": "/collections/燙布貼", "label": "燙布貼", "clicks": 509, "impressions": 18679, "ctr": 2.72, "position": 6.3}, {"path": "/collections/馬克杯", "label": "馬克杯", "clicks": 462, "impressions": 27946, "ctr": 1.65, "position": 6.7}, {"path": "/collections/撲克牌", "label": "撲克牌", "clicks": 458, "impressions": 2978, "ctr": 15.38, "position": 3.5}, {"path": "/collections/保冷袋", "label": "保冷袋", "clicks": 385, "impressions": 19383, "ctr": 1.99, "position": 7.2}, {"path": "/collections/l型資料夾", "label": "l型資料夾", "clicks": 301, "impressions": 8314, "ctr": 3.62, "position": 6.3}, {"path": "/collections/pvc夾鏈袋", "label": "pvc夾鏈袋", "clicks": 290, "impressions": 9447, "ctr": 3.07, "position": 7.0}, {"path": "/collections/吊牌印刷", "label": "吊牌印刷", "clicks": 280, "impressions": 7522, "ctr": 3.72, "position": 9.0}, {"path": "/collections/帆布袋", "label": "帆布袋", "clicks": 273, "impressions": 17917, "ctr": 1.52, "position": 9.8}, {"path": "/collections/壓力球", "label": "壓力球", "clicks": 264, "impressions": 6864, "ctr": 3.85, "position": 5.7}, {"path": "/collections/便條紙便利貼", "label": "便條紙便利貼", "clicks": 253, "impressions": 15570, "ctr": 1.62, "position": 6.8}];
+const gscDevices = [{"device": "DESKTOP", "clicks": 19122, "impressions": 501854, "ctr": 3.81, "position": 7.4}, {"device": "MOBILE", "clicks": 10252, "impressions": 528900, "ctr": 1.94, "position": 6.7}, {"device": "TABLET", "clicks": 176, "impressions": 10255, "ctr": 1.72, "position": 6.8}];
+const baseLayout = {
+  paper_bgcolor: "#ffffff",
+  plot_bgcolor: "#ffffff",
+  margin: { l: 60, r: 24, t: 20, b: 50 },
+  font: { family: '-apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif', color: "#172033" },
+  xaxis: { gridcolor: "#edf2f7" },
+  yaxis: { gridcolor: "#edf2f7" },
+  hovermode: "closest"
+};
+
+function toggleLandingRank(mode, button) {
+  document.querySelectorAll("#landing-diagnostics .toggle-pane").forEach((node) => {
+    node.classList.remove("active");
+  });
+  document.querySelectorAll("#landing-diagnostics .toggle-btn").forEach((node) => {
+    node.classList.remove("active");
+  });
+  const target = document.getElementById(`landing-rank-${mode}`);
+  if (target) target.classList.add("active");
+  if (button) button.classList.add("active");
+}
+
+Plotly.newPlot("chart_landing", [{
+  y: landingPages.map(item => item.label).reverse(),
+  x: landingPages.map(item => item.sessions).reverse(),
+  type: "bar",
+  orientation: "h",
+  marker: { color: landingPages.map(item => item.is_bot_suspect ? "#ef4444" : "#0ea5e9").reverse() },
+  customdata: landingPages.map(item => [item.page, item.avg_engagement_sec, item.screenPageViews, item.bounceRate]).reverse(),
+  hovertemplate: "<b>%{customdata[0]}</b><br>Sessions: %{x:,}<br>Avg engagement: %{customdata[1]}s<br>Pageviews: %{customdata[2]:,}<br>Bounce rate: %{customdata[3]:.1%}<extra></extra>"
+}], {
+  ...baseLayout,
+  height: 720,
+  margin: { l: 220, r: 20, t: 20, b: 50 },
+  xaxis: { title: "Sessions", gridcolor: "#edf2f7" },
+  yaxis: { title: "", automargin: true },
+  showlegend: false
+}, { responsive: true });
+
+Plotly.newPlot("chart_events", [{
+  y: events.map(item => item.event).reverse(),
+  x: events.map(item => item.eventCount).reverse(),
+  type: "bar",
+  orientation: "h",
+  marker: { color: "#8b5cf6" },
+  customdata: events.map(item => item.totalUsers).reverse(),
+  hovertemplate: "<b>%{y}</b><br>Event count: %{x:,}<br>Total users: %{customdata:,}<extra></extra>"
+}], {
+  ...baseLayout,
+  height: 720,
+  margin: { l: 240, r: 20, t: 20, b: 50 },
+  xaxis: { title: "Event count", gridcolor: "#edf2f7" },
+  yaxis: { title: "", automargin: true },
+  showlegend: false
+}, { responsive: true });
+
+Plotly.newPlot("chart_funnel_form", [{
+  y: funnelForm.map(item => item.step),
+  x: funnelForm.map(item => item.users),
+  type: "funnel",
+  textinfo: "value+percent initial",
+  marker: { color: "#10b981" }
+}], {
+  ...baseLayout,
+  height: 320,
+  margin: { l: 140, r: 40, t: 10, b: 30 }
+}, { responsive: true });
+
+Plotly.newPlot("chart_funnel_line", [{
+  y: funnelLine.map(item => item.step),
+  x: funnelLine.map(item => item.users),
+  type: "funnel",
+  textinfo: "value+percent initial",
+  marker: { color: "#06b6d4" }
+}], {
+  ...baseLayout,
+  height: 320,
+  margin: { l: 140, r: 40, t: 10, b: 30 }
+}, { responsive: true });
+
+Plotly.newPlot("chart_gsc_daily", [
+  {
+    x: gscDaily.map(item => item.date),
+    y: gscDaily.map(item => item.clicks),
+    name: "Clicks",
+    type: "bar",
+    marker: { color: "#2563eb" }
+  },
+  {
+    x: gscDaily.map(item => item.date),
+    y: gscDaily.map(item => item.impressions),
+    name: "Impressions",
+    type: "scatter",
+    mode: "lines",
+    yaxis: "y2",
+    line: { color: "#94a3b8", width: 2 }
+  }
+], {
+  ...baseLayout,
+  height: 360,
+  xaxis: { type: "date", gridcolor: "#edf2f7" },
+  yaxis: { title: "Clicks", gridcolor: "#edf2f7" },
+  yaxis2: { title: "Impressions", overlaying: "y", side: "right", showgrid: false },
+  legend: { orientation: "h", y: 1.12 }
+}, { responsive: true });
+
+Plotly.newPlot("chart_gsc_pages", [{
+  y: gscPages.map(item => item.label).reverse(),
+  x: gscPages.map(item => item.clicks).reverse(),
+  type: "bar",
+  orientation: "h",
+  marker: { color: "#0ea5e9" },
+  customdata: gscPages.map(item => [item.path, item.impressions, item.ctr, item.position]).reverse(),
+  hovertemplate: "<b>%{customdata[0]}</b><br>Clicks: %{x:,}<br>Impressions: %{customdata[1]:,}<br>CTR: %{customdata[2]}%<br>Position: %{customdata[3]}<extra></extra>"
+}], {
+  ...baseLayout,
+  height: 580,
+  margin: { l: 180, r: 24, t: 20, b: 50 },
+  xaxis: { title: "Clicks", gridcolor: "#edf2f7" },
+  yaxis: { title: "", automargin: true, tickfont: { size: 11 } },
+  showlegend: false
+}, { responsive: true });
+
+Plotly.newPlot("chart_gsc_devices", [{
+  y: gscDevices.map(item => item.device).reverse(),
+  x: gscDevices.map(item => item.ctr).reverse(),
+  type: "bar",
+  orientation: "h",
+  marker: { color: ["#f59e0b", "#10b981", "#60a5fa"].slice(0, gscDevices.length).reverse() },
+  customdata: gscDevices.map(item => [item.clicks, item.impressions]).reverse(),
+  text: gscDevices.map(item => `${item.clicks} clicks`).reverse(),
+  textposition: "outside",
+  hovertemplate: "<b>%{y}</b><br>CTR: %{x}%<br>Clicks: %{customdata[0]:,}<br>Impressions: %{customdata[1]:,}<extra></extra>"
+}], {
+  ...baseLayout,
+  height: 320,
+  xaxis: { title: "CTR %", gridcolor: "#edf2f7" },
+  yaxis: { title: "", automargin: true },
+  showlegend: false
+}, { responsive: true });
+</script>
+</body>
+</html>
