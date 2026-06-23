@@ -146,8 +146,8 @@
       <div class="kpi-grid">
         <div class="card"><div class="label">90-day sessions</div><div class="value">50,105</div></div>
         <div class="card"><div class="label">Engagement rate</div><div class="value">76.7%</div></div>
-        <div class="card"><div class="label">Estimated inquiry users</div><div class="value">2,421</div></div>
-        <div class="card"><div class="label">Estimated inquiry rate</div><div class="value">4.5%</div></div>
+        <div class="card"><div class="label">Inquiry users (form+LINE)</div><div class="value">2,421</div><div class="label" style="color:var(--muted);font-size:10px">sum of 2 funnels · not deduped</div></div>
+        <div class="card"><div class="label">Inquiry rate (form+LINE)</div><div class="value">4.5%</div><div class="label" style="color:var(--muted);font-size:10px">inquiry users ÷ sessions</div></div>
         <div class="card"><div class="label">GSC clicks</div><div class="value">17,763</div></div>
         <div class="card"><div class="label">Avg GSC CTR</div><div class="value">2.7%</div></div>
       </div>
@@ -338,9 +338,24 @@
     </section>
     <section id="audiences">
       <h2>Audience performance (traffic)</h2>
-      <p>Traffic accumulated by each audience over the last 90 days (GA4 audienceName dimension; matches GA4 / Looker and changes with the range tabs). Site-wide avg session this period: 3.13 min (187.6s).</p>
-      <div class="table-wrap"><table class="data-table"><tr><th>Audience</th><th style="text-align:right;">Users</th><th style="text-align:right;">Sessions</th><th style="text-align:right;">Views</th></tr><tr><td><b>All Users</b></td><td>46,493</td><td><b>86,582</b></td><td>294,334</td></tr><tr><td><b>搜尋者</b></td><td>813</td><td><b>3,652</b></td><td>21,908</td></tr><tr><td><b>工作階段持續時間小於一分鐘目標客群</b><br><span style="color:var(--muted);font-size:11px;">sessionDuration &lt; 60s · static · ever-met · created 2026-06-15 · 7d 16,569 sessions</span></td><td>6,961</td><td><b>16,569</b></td><td>21,427</td></tr><tr><td><b>購買者</b></td><td>277</td><td><b>960</b></td><td>6,065</td></tr><tr><td><b>工作階段持續時間大於三分鐘目標客群</b><br><span style="color:var(--muted);font-size:11px;">sessionDuration &gt; 180s · dynamic · only while currently meeting · created 2026-05-13 · 7d 969 sessions</span></td><td>2,720</td><td><b>6,379</b></td><td>3,215</td></tr></table></div>
-      <p style="color:var(--muted);font-size:12px;margin-top:8px;">Fetched: 2026-06-22 · Note: audience traffic is not backfilled — it counts only from each audience's creation date, so 90/180-day figures may equal shorter ranges; newly (re)created audiences take a few days to start accruing data.</p>
+      <p>Traffic accumulated by each audience over the last 90 days (GA4 audienceName dimension; matches GA4 / Looker and changes with the range tabs). Site-wide avg session this period: 3.08 min (184.9s).</p>
+      <div class="table-wrap"><table class="data-table noheat-table">
+        <thead><tr><th>Audience</th><th style="text-align:right;">Users</th><th style="text-align:right;">Sessions</th><th style="text-align:right;">Views</th><th style="text-align:right;">Conv.</th><th style="text-align:right;">Conv. rate</th></tr></thead>
+        <tbody><tr><td><b>All Users</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">65,844</td><td style="text-align:right;font-variant-numeric:tabular-nums;"><b>89,038</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">398,445</td><td style="text-align:right;font-variant-numeric:tabular-nums;">4,785</td><td style="text-align:right;font-weight:700;color:#4f46e5">5.37%</td></tr><tr><td><b>工作階段持續時間小於一分鐘目標客群</b><br><span style="color:var(--muted);font-size:11px;">sessionDuration &lt; 60s · static · ever-met · created 2026-06-15 · 7d 20,484 sessions</span></td><td style="text-align:right;font-variant-numeric:tabular-nums;">20,346</td><td style="text-align:right;font-variant-numeric:tabular-nums;"><b>21,517</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">60,638</td><td style="text-align:right;font-variant-numeric:tabular-nums;">328</td><td style="text-align:right;font-weight:700;color:#64748b">1.52%</td></tr><tr><td><b>工作階段持續時間大於三分鐘目標客群</b><br><span style="color:var(--muted);font-size:11px;">sessionDuration &gt; 180s · dynamic · only while currently meeting · created 2026-05-13 · 7d 805 sessions</span></td><td style="text-align:right;font-variant-numeric:tabular-nums;">4,886</td><td style="text-align:right;font-variant-numeric:tabular-nums;"><b>6,425</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">5,775</td><td style="text-align:right;font-variant-numeric:tabular-nums;">1</td><td style="text-align:right;font-weight:700;color:#64748b">0.02%</td></tr><tr><td><b>搜尋者</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">1,374</td><td style="text-align:right;font-variant-numeric:tabular-nums;"><b>3,746</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">36,778</td><td style="text-align:right;font-variant-numeric:tabular-nums;">401</td><td style="text-align:right;font-weight:700;color:#16a34a">10.7%</td></tr><tr><td><b>購買者</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">324</td><td style="text-align:right;font-variant-numeric:tabular-nums;"><b>946</b></td><td style="text-align:right;font-variant-numeric:tabular-nums;">7,156</td><td style="text-align:right;font-variant-numeric:tabular-nums;">389</td><td style="text-align:right;font-weight:700;color:#16a34a">41.12%</td></tr></tbody>
+      </table></div>
+      <div class="two-col" style="margin-top:16px;">
+        <div class="subcard">
+          <h3>Conversion rate by audience (excl. All Users)</h3>
+          <p>Which audience converts best (conv = GA4 key events ÷ sessions).</p>
+          <div id="chart_aud_convrate" class="chart"></div>
+        </div>
+        <div class="subcard">
+          <h3>Audience sessions trend</h3>
+          <p>Daily sessions over the last 90 days; click legend to toggle.</p>
+          <div id="chart_aud_trend" class="chart"></div>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:12px;margin-top:8px;">Fetched: 2026-06-23 · Note: audience traffic is not backfilled — it counts only from each audience's creation date, so 90/180-day figures may equal shorter ranges; newly (re)created audiences take a few days to start accruing data.</p>
     </section>
 
     <section id="line">
@@ -647,6 +662,27 @@ if (lineCrm && lineCrm.heatmap && document.getElementById("chart_linecrm_heat"))
     xaxis:{title:"",tickfont:{size:9}}, yaxis:{automargin:true} }, {responsive:true});
 }
 // ---- end LINE CRM charts ----
+
+// ---- audience charts ----
+const audData = {"available": true, "fetched_at": "2026-06-23", "range_days": 90, "rows": [{"name": "All Users", "users_str": "65,844", "sessions_str": "89,038", "views_str": "398,445", "sessions_int": 89038, "conversions_str": "4,785", "conv_rate": 5.37, "sub": "", "recent": "", "is_tracked": false}, {"name": "工作階段持續時間小於一分鐘目標客群", "users_str": "20,346", "sessions_str": "21,517", "views_str": "60,638", "sessions_int": 21517, "conversions_str": "328", "conv_rate": 1.52, "sub": "sessionDuration < 60s · static · ever-met · created 2026-06-15", "recent": "7d 20,484 sessions", "is_tracked": true}, {"name": "工作階段持續時間大於三分鐘目標客群", "users_str": "4,886", "sessions_str": "6,425", "views_str": "5,775", "sessions_int": 6425, "conversions_str": "1", "conv_rate": 0.02, "sub": "sessionDuration > 180s · dynamic · only while currently meeting · created 2026-05-13", "recent": "7d 805 sessions", "is_tracked": true}, {"name": "搜尋者", "users_str": "1,374", "sessions_str": "3,746", "views_str": "36,778", "sessions_int": 3746, "conversions_str": "401", "conv_rate": 10.7, "sub": "", "recent": "", "is_tracked": false}, {"name": "購買者", "users_str": "324", "sessions_str": "946", "views_str": "7,156", "sessions_int": 946, "conversions_str": "389", "conv_rate": 41.12, "sub": "", "recent": "", "is_tracked": false}], "conv_rank": [{"name": "購買者", "users_str": "324", "sessions_str": "946", "views_str": "7,156", "sessions_int": 946, "conversions_str": "389", "conv_rate": 32.9, "sub": "", "recent": "", "is_tracked": false}, {"name": "搜尋者", "users_str": "1,374", "sessions_str": "3,746", "views_str": "36,778", "sessions_int": 3746, "conversions_str": "401", "conv_rate": 10.7, "sub": "", "recent": "", "is_tracked": false}, {"name": "工作階段持續時間小於一分鐘目標客群", "users_str": "20,346", "sessions_str": "21,517", "views_str": "60,638", "sessions_int": 21517, "conversions_str": "328", "conv_rate": 1.44, "sub": "sessionDuration < 60s · static · ever-met · created 2026-06-15", "recent": "7d 20,484 sessions", "is_tracked": true}, {"name": "工作階段持續時間大於三分鐘目標客群", "users_str": "4,886", "sessions_str": "6,425", "views_str": "5,775", "sessions_int": 6425, "conversions_str": "1", "conv_rate": 0.02, "sub": "sessionDuration > 180s · dynamic · only while currently meeting · created 2026-05-13", "recent": "7d 805 sessions", "is_tracked": true}], "trend_dates": ["2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-11", "2026-04-12", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-18", "2026-04-19", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09", "2026-05-10", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-16", "2026-05-17", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-23", "2026-05-24", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-05-30", "2026-05-31", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-19", "2026-06-20", "2026-06-21", "2026-06-22"], "trend_lines": [{"name": "工作階段持續時間小於一分鐘目標客群", "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 581, 879, 1060, 1472, 1082, 1418, 2980, 2672]}, {"name": "工作階段持續時間大於三分鐘目標客群", "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 108, 100, 28, 22, 83, 112, 105, 101, 84, 26, 21, 100, 98, 94, 118, 77, 18, 22, 88, 92, 104, 100, 83, 22, 22, 95, 100, 96, 90, 83, 22, 22, 85, 104, 98, 92, 16, 22, 15, 0]}, {"name": "搜尋者", "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 115, 99, 23, 20, 104, 124, 94, 103, 88, 12, 8, 96, 108, 89, 144, 97, 15, 15, 106, 109, 134, 126, 105, 26, 26, 131, 110, 95, 110, 81, 15, 26, 90, 128, 128, 112, 14, 17, 14, 94]}, {"name": "購買者", "values": [9, 11, 11, 0, 3, 10, 12, 10, 4, 1, 1, 1, 2, 10, 8, 7, 7, 2, 2, 5, 8, 6, 6, 3, 1, 1, 11, 8, 14, 14, 12, 1, 2, 8, 5, 5, 3, 0, 0, 1, 5, 5, 6, 8, 4, 1, 2, 13, 9, 8, 5, 8, 1, 0, 6, 9, 12, 8, 8, 0, 1, 10, 9, 5, 9, 6, 1, 2, 5, 8, 6, 9, 12, 1, 2, 11, 8, 8, 6, 8, 2, 1, 6, 6, 11, 10, 1, 1, 1, 5]}], "site": {"sessions": "89,038", "users": "65,844", "avg_sec": "184.9", "avg_min": "3.08"}};
+if (audData && audData.conv_rank && audData.conv_rank.length && document.getElementById("chart_aud_convrate")) {
+  const cr = audData.conv_rank.slice().reverse();
+  Plotly.newPlot("chart_aud_convrate", [{
+    y: cr.map(a=>a.name), x: cr.map(a=>a.conv_rate), type:"bar", orientation:"h",
+    marker:{ color: cr.map(a=> a.conv_rate>=10 ? "#16a34a" : (a.conv_rate>=3 ? "#4f46e5" : "#94a3b8")) },
+    text: cr.map(a=>a.conv_rate+"%"), textposition:"outside", cliponaxis:false
+  }], { ...baseLayout, height:300, margin:{l:170,r:44,t:10,b:36},
+    xaxis:{title:"%",gridcolor:"#edf2f7"}, yaxis:{automargin:true,tickfont:{size:10}}, showlegend:false }, {responsive:true});
+}
+if (audData && audData.trend_lines && audData.trend_lines.length && document.getElementById("chart_aud_trend")) {
+  const palette=["#4f46e5","#06b6d4","#f59e0b","#ef4444","#10b981","#a855f7"];
+  Plotly.newPlot("chart_aud_trend", audData.trend_lines.map((t,i)=>({
+    x: audData.trend_dates, y: t.values, name: t.name, type:"scatter", mode:"lines", line:{width:1.6, color:palette[i%palette.length]}
+  })), { ...baseLayout, height:300, margin:{l:48,r:16,t:10,b:36},
+    xaxis:{type:"date",gridcolor:"#edf2f7"}, yaxis:{title:"sessions",gridcolor:"#edf2f7",rangemode:"tozero"},
+    legend:{orientation:"h",y:1.3,font:{size:9}} }, {responsive:true});
+}
+// ---- end audience charts ----
 
 // table heatmap: shade numeric metric columns by value.
 // Runs on the rendered DOM, so it auto-recolours the anonymized fake-data build too.
