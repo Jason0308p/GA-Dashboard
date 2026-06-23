@@ -131,6 +131,7 @@
       <a href="#events">Events</a>
       <a href="#funnels">Funnels</a>
       <a href="#gsc">GSC</a>
+      <a href="#line-crm">LINE inbound</a>
       <a href="index.html">🏠 Home</a>
       
     </div>
@@ -356,6 +357,8 @@
       <p style="color:var(--muted);font-size:12px;margin-top:8px;">Fetched: 2026-06-22</p>
     </section>
 
+    
+
 
     
 
@@ -573,6 +576,47 @@ if (document.getElementById("chart_page_type") && pts.dates && pts.dates.length)
     }]
   }, { responsive: true });
 }
+
+// ---- LINE 進線/業務 (CRM) charts ----
+const lineCrm = null;
+if (lineCrm && lineCrm.weekly && document.getElementById("chart_linecrm_trend")) {
+  const wk = lineCrm.weekly;
+  Plotly.newPlot("chart_linecrm_trend", [
+    { x: wk.map(w=>w.week), y: wk.map(w=>w.handled), name: "Handled", type:"bar", marker:{color:"#22c55e"} },
+    { x: wk.map(w=>w.week), y: wk.map(w=>w.unhandled), name: "Unhandled", type:"bar", marker:{color:"#ef4444"} },
+    { x: wk.map(w=>w.week), y: wk.map(w=>w.rate), name: "Unhandled %", type:"scatter", mode:"lines+markers", yaxis:"y2", line:{color:"#b45309",width:2} }
+  ], { ...baseLayout, height: 320, barmode:"stack", margin:{l:48,r:48,t:16,b:40},
+    xaxis:{type:"date",gridcolor:"#edf2f7"}, yaxis:{title:"Inbound",gridcolor:"#edf2f7"},
+    yaxis2:{title:"%",overlaying:"y",side:"right",showgrid:false,rangemode:"tozero"},
+    legend:{orientation:"h",y:1.18} }, {responsive:true});
+}
+if (lineCrm && lineCrm.sales_load && document.getElementById("chart_linecrm_sales")) {
+  const s = lineCrm.sales_load.slice().reverse();
+  Plotly.newPlot("chart_linecrm_sales", [{
+    y: s.map(x=>x.name), x: s.map(x=>x.count), type:"bar", orientation:"h",
+    marker:{ color: s.map(x=> x.is_unhandled ? "#ef4444" : "#06c755") },
+    text: s.map(x=>x.count.toLocaleString()), textposition:"outside", cliponaxis:false
+  }], { ...baseLayout, height: 320, margin:{l:96,r:36,t:12,b:36},
+    xaxis:{title:"Inbound",gridcolor:"#edf2f7"}, yaxis:{automargin:true}, showlegend:false }, {responsive:true});
+}
+if (lineCrm && lineCrm.category_top && document.getElementById("chart_linecrm_cat")) {
+  const ct = lineCrm.category_top.slice(0,12).reverse();
+  Plotly.newPlot("chart_linecrm_cat", [{
+    y: ct.map(x=>x.name), x: ct.map(x=>x.count), type:"bar", orientation:"h",
+    marker:{color:"#4f46e5",cornerradius:4}, text: ct.map(x=>x.count.toLocaleString()), textposition:"outside", cliponaxis:false
+  }], { ...baseLayout, height: 360, margin:{l:110,r:40,t:12,b:36},
+    xaxis:{title:"Inquiries",gridcolor:"#edf2f7"}, yaxis:{automargin:true}, showlegend:false }, {responsive:true});
+}
+if (lineCrm && lineCrm.heatmap && document.getElementById("chart_linecrm_heat")) {
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const hours = Array.from({length:24}, (_,h)=>h+"時");
+  Plotly.newPlot("chart_linecrm_heat", [{
+    z: lineCrm.heatmap, x: hours, y: days, type:"heatmap", colorscale:"YlOrRd", hoverongaps:false,
+    hovertemplate: "%{y} %{x}<br>Inbound: %{z}<extra></extra>"
+  }], { ...baseLayout, height: 320, margin:{l:56,r:16,t:12,b:40},
+    xaxis:{title:"",tickfont:{size:9}}, yaxis:{automargin:true} }, {responsive:true});
+}
+// ---- end LINE CRM charts ----
 
 // table heatmap: shade numeric metric columns by value.
 // Runs on the rendered DOM, so it auto-recolours the anonymized fake-data build too.
